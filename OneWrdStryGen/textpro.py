@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 def sentence(phrase):
-    interrogatives = ("how", "waht", "why")
+    interrogatives = ("how", "what", "why")
     capitalized = phrase.capitalize()
     if phrase.startswith(interrogatives):
         return "{}?".format(capitalized)
