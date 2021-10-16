@@ -4,7 +4,7 @@ from datetime import date #not part of video practice, messing around with pytho
 name = input('Enter your name: ')
 surname = input('Enter your surname: ')
 
-when = date.today()
+when = "today"
 print(type(when))
 
 message = "Hello %s %s!" % (name, surname)
