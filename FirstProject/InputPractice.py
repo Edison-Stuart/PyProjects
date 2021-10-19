@@ -9,5 +9,5 @@ def weather_condition(temperature):
 
 # print(user_input.lower())    can make changes to the user input with methods
 
-user_input = float(input('Enter temperature:')) # We convert the string into a float so our function will work
-print(weather_condition(user_input)) 
+user_input = float(input('Enter temperature:')) # We convert the string into a float so our function works
+print(weather_condition(user_input))

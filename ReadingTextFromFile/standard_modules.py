@@ -3,8 +3,8 @@ import time
 import os
 
 while True:
-    if os.path.exists("files/Fruits.txt"):    
-        with open("files/Fruits.txt") as file:
+    if os.path.exists("text/Fruits.txt"):    
+        with open("text/Fruits.txt") as file:
             print(file.read())
     else:
         print("File does not exist")
