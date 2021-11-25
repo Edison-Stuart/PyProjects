@@ -15,4 +15,4 @@ for image in images: # loop over the list and apply changes to images
     cv2.imshow('Hey',re) #display a window
     cv2.waitKey(500)
     cv2.destroyAllWindows()
-    cv2.imwrite("resized_"+image,re) #save resized image
+    cv2.imwrite(image,re) #save resized image

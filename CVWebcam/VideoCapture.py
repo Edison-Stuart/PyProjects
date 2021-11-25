@@ -1,26 +1,21 @@
 #!/usr/bin/env python3
 import cv2, time
+from VideoCap.VideoCapData import *
 
-video=cv2.VideoCapture(0)
-
-a=0
+video = VideoController()
+count = Increment(0)
 
 while True:
-    a=a+1    
-    check, frame = video.read()
-
-    print(check)
-    print(frame)
-
-    gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    #time.sleep(3)
-    cv2.imshow("Capturing",gray)
+    count.add_to_value()      
     
-    key=cv2.waitKey(1)
-
-    if key==ord('q'):
+    gray = Out_Gray(VideoController.GetView()) #changes image to grayscale
+    cv2.imshow("Capturing",gray) #presents the frame in a window
+    
+    break_key = cv2.waitKey(1) #waits 1 millisecond
+    if break_key == ord('q'):
         break
-print(a)
 
-video.release()
-cv2.destroyAllWindows
+video.VideoEnd()
+count.get_value()
+
+
