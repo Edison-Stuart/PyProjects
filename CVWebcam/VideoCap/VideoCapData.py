@@ -4,7 +4,7 @@ import cv2
 
 class VideoController():
     camera_output = cv2.VideoCapture(0)
-    def GetView():
+    def GetView(self):
         check, frame = VideoController.camera_output.read()
         return frame
 

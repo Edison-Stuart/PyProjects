@@ -8,7 +8,7 @@ count = Increment(0)
 while True:
     count.add_to_value()      
     
-    gray = Out_Gray(VideoController.GetView()) #changes image to grayscale
+    gray = Out_Gray(video.GetView()) #changes image to grayscale
     cv2.imshow("Capturing",gray) #presents the frame in a window
     
     break_key = cv2.waitKey(1) #waits 1 millisecond
@@ -16,6 +16,4 @@ while True:
         break
 
 video.VideoEnd()
-count.get_value()
-
-
+print(count.get_value())
