@@ -1,0 +1,35 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../TextBasedCOA"
+		},
+		{
+			"path": "../OneWrdStryGen"
+		},
+		{
+			"path": "../TestCode"
+		},
+		{
+			"path": "../SecondProject"
+		},
+		{
+			"path": "../ReadingTextFromFile"
+		},
+		{
+			"path": "../DataFromFiles"
+		},
+		{
+			"path": "../VolcanoMap"
+		},
+		{
+			"path": "../Errors"
+		},
+		{
+			"path": "../CVWebcam"
+		}
+	],
+	"settings": {}
+}
