@@ -1,0 +1,42 @@
+{
+    "user1": {
+        "username": "user1",
+        "password": "password1",
+        "created": "2018-07-07 00:16:28:293901"
+    },
+    "user2": {
+        "username": "user2",
+        "password": "password2",
+        "created": "2018-07-07 00:28:07:315781"
+    },
+    "eddie": {
+        "username": "eddie",
+        "password": "pass1",
+        "created": "2022-02-14 20-25-10"
+    },
+    "u3": {
+        "username": "u3",
+        "password": "p3",
+        "created": "2022-02-14 20-31-05"
+    },
+    "u4": {
+        "username": "u4",
+        "password": "p4",
+        "created": "2022-02-14 20-32-43"
+    },
+    "Adin": {
+        "username": "Adin",
+        "password": "StinkyMurph",
+        "created": "2022-02-14 21-19-51"
+    },
+    "Eddie2": {
+        "username": "Eddie2",
+        "password": "pasder",
+        "created": "2022-02-14 20-37-58"
+    },
+    "u1": {
+        "username": "u1",
+        "password": "p1",
+        "created": "2022-02-14 21-00-34"
+    }
+}
