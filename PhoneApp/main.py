@@ -103,12 +103,16 @@ class SignUpScreen(Screen):
     """Displays the sign up screen for the quote app."""
     def add_user(self, uname, pword, answer):
         """Method that defines the instructions for the add user button."""
-        my_salt = os.urandom(32)
-        hashed_pword = hash_password(pword, my_salt)
-        key_combo = my_salt + hashed_pword
-
-        db.insert(uname,key_combo,answer)
-        self.manager.current = "sign_up_screen_success"
+        # check if user is in db
+        check_in_db = db.is_in_db(uname)
+        if check_in_db is True:
+            self.ids.username_active.text = "This username is already taken."
+        else:
+            my_salt = os.urandom(32)
+            hashed_pword = hash_password(pword, my_salt)
+            key_combo = my_salt + hashed_pword
+            db.insert(uname,key_combo,answer)
+            self.manager.current = "sign_up_screen_success"
 
     def back_to_login(self):
         """Method that defines the instructions for the back to login button."""

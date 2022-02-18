@@ -1,5 +1,4 @@
 import hashlib
-import os
 import sqlite3
 
 class DataBase:
@@ -27,16 +26,25 @@ class DataBase:
         rows=self.cur.fetchall()
         return rows
     
-    # def search(self,title="",author="",year="",isbn=""):
-    #     """This method allows you to search for a book using any of the four identifiers."""
-    #     self.cur.execute("SELECT * FROM book WHERE title=? OR author=? OR year=? OR isbn=?", (title,author,year,isbn))
-    #     rows=self.cur.fetchall()
-    #     return rows
+    def view_all(self):
+        """This method selects all from the database"""
+        self.cur.execute("SELECT * FROM book")
+        rows=self.cur.fetchall()
+        return rows
+
+    def is_in_db(self,uname):
+        """This method allows you to search for a book using any of the four identifiers."""
+        self.cur.execute("SELECT * FROM book")
+        rows=self.cur.fetchall()
+        answer = None
+        for users in rows:
+            if users[1] != uname:
+                answer = False
+            elif users[1] == uname:
+                answer = True
+                break
+        return answer
     
-    # def delete(self,book_id):
-    #     """This method deletes a selection from the database."""
-    #     self.cur.execute("DELETE FROM book WHERE id=?",(book_id,))
-    #     self.conn.commit()
     
     def update_password(self,password,uname):
         """This method lets you update existing books with new information."""
