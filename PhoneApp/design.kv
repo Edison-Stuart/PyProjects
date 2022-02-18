@@ -15,7 +15,7 @@
                 id: password
                 hint_text: "Password"
                 password: True
-            RelativeLayout:    
+            RelativeLayout:
                 Button:
                     text: "Login"
                     size_hint: 0.3, 0.5
@@ -48,24 +48,56 @@
         padding: 20, 20
         spacing: 20, 20
         Label:
-            text: "Please enter your username and mother's maiden name"
+            text: "Please enter your username"
         TextInput:
             id: forgotten_username
             hint_text: "Username"
-        TextInput:
-            id: security_answer
-            hint_text: "Maiden Name"
         Label:
             id: name_response
-            text: ""
+            text: "Please enter Please enter your mother's maiden name, your favorite teacher, or a cool phrase you chose in box below"
+        TextInput:
+            id: security_answer
         GridLayout:
             cols: 2
             Button:
                 text: 'Back to login'
                 on_press: root.back_to_login()
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
             Button:
-                text: 'Enter'
-                on_press: root.security_question(root.ids.forgotten_username.text, root.ids.security_answer.text)
+                text: 'Enter Security'
+                on_press: root.security_question_answer(root.ids.security_answer.text,root.ids.forgotten_username.text)
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+
+<ChangePasswordScreen>:
+    GridLayout:
+        cols:1
+        padding: 20, 20
+        spacing: 20, 20
+        Label:
+            text: "Please enter your username and new password"
+        TextInput:
+            id: changed_username
+            hint_text: "Username"
+        TextInput:
+            id: new_password
+            hint_text: "New Password"
+        Label:
+            id: password_response_label
+            text: ""
+        GridLayout:
+            cols: 2
+            Button:
+                text: "Back to login"
+                on_press: root.back_to_login()
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+            Button:
+                text: "Enter new info"
+                on_press: root.change_password(root.ids.changed_username.text,root.ids.new_password.text)
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
 
 <SignUpScreen>:
     GridLayout:
@@ -80,17 +112,31 @@
         TextInput:
             id: password
             hint_text: "Password"
+        GridLayout:
+            cols:1
+        Label:
+            text: "Please pick only one security question to fill"
+        Label:
+            text: "Your mother's maiden name"
+        Label:
+            text: "The name of your favorite teacher"
+        Label:
+            text: "A cool phrase that you will remeber"
         TextInput:
-            id: maiden_name
-            hint_text: "Please enter your mother's maiden name"
+            id: answer_input
+            hint_text: "Please answer here"
         GridLayout:
             cols: 2
             Button:
                 text: "Back to login"
                 on_press: root.back_to_login()
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
             Button:
                 text: "Submit"
-                on_press: root.add_user(root.ids.username.text, root.ids.password.text, root.ids.maiden_name.text)
+                on_press: root.add_user(root.ids.username.text, root.ids.password.text, root.ids.answer_input.text)
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
 
 <SignUpScreenSuccess>:
     GridLayout:
@@ -100,6 +146,8 @@
         Button:
             text: "Login page"
             on_press: root.back_to_login()
+            background_color: 1,1,1,0
+            color: 0.1, 0.7, 0.7, 1
 
 <LoginScreenSuccess>:
     GridLayout:
@@ -120,6 +168,8 @@
         Button:
             text: "Enlighten me"
             on_press: root.get_quote(root.ids.feeling.text)
+            background_color: 1,1,1,0
+            color: 0.1, 0.7, 0.7, 1
         ScrollView:
             Label:
                 id: quote
@@ -139,3 +189,5 @@
         name: "login_screen_success"
     ForgotPasswordScreen:
         name: "forgot_password_screen"
+    ChangePasswordScreen:
+        name: "change_password_screen"
