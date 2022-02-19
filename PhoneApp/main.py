@@ -17,6 +17,10 @@ from password import validate_password
 db = DataBase("users.db")
 Builder.load_file('design.kv')
 
+class RootWidget(ScreenManager):
+    """Class that is connected to the kivy screen manager and helps us control the various screens."""
+    pass
+
 class LoginScreen(Screen):
     """Displays the login screen for the quote app."""
     def sign_up(self):
@@ -52,12 +56,14 @@ class ForgotPasswordScreen(Screen):
 
     def security_question_answer(self, answer, uname):
         """Method that defines the button for the final security question"""
-        try:
+        check_in_db = db.is_in_db(uname)
+        if check_in_db is True:
             user_info = db.view_user_security_data(uname)
             if answer == user_info[0][1]:
                 self.manager.current = "change_password_screen"
+            else:
                 self.ids.name_response.text = "That is not a correct security answer"
-        except:
+        else:
             self.ids.name_response.text = "That username is not in our file"
 
 class ChangePasswordScreen(Screen):
@@ -65,11 +71,15 @@ class ChangePasswordScreen(Screen):
     def change_password(self, uname, pword):
         """Method that defines the instructions for the change password button"""
         
-        my_salt = os.urandom(32)
-        hashed_pword = hash_password(pword, my_salt)
-        key_combo = my_salt + hashed_pword
-        db.update_password(key_combo, uname)
-        self.ids.password_response_label.text = "Your password has been reset!"
+        check_in_db = db.is_in_db(uname)
+        if check_in_db is True:
+            my_salt = os.urandom(32)
+            hashed_pword = hash_password(pword, my_salt)
+            key_combo = my_salt + hashed_pword
+            db.update_password(key_combo, uname)
+            self.ids.password_response_label.text = "Your password has been reset!"
+        else:
+            self.ids.password_response_label.text = "That was an incorrect username"
     
     def back_to_login(self):
         """A method that moves us back to the login screen"""
@@ -94,10 +104,6 @@ class LoginScreenSuccess(Screen):
             self.ids.quote.text = random.choice(quotes)
         else:
             self.ids.quote.text = "That isn't a feeling you idiot!"
-
-class ImageButton(ButtonBehavior, HoverBehavior, Image):
-    """This class allows us to have a special button animation"""
-    pass
 
 class SignUpScreen(Screen):
     """Displays the sign up screen for the quote app."""
@@ -126,8 +132,8 @@ class SignUpScreenSuccess(Screen):
         self.manager.transition.direction = 'right'
         self.manager.current = "login_screen"
 
-class RootWidget(ScreenManager):
-    """Class that is connected to the kivy screen manager and helps us control the various screens."""
+class ImageButton(ButtonBehavior, HoverBehavior, Image):
+    """This class allows us to have a special button animation"""
     pass
 
 class MainApp(App):

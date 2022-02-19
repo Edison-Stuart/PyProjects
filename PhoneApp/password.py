@@ -2,7 +2,7 @@ import hashlib
 import sqlite3
 
 class DataBase:
-    """ This class connects to and interacts with a book keeping database."""
+    """ This class connects to and interacts with a database filled with app user data."""
     def __init__(self,my_db):
         self.conn = sqlite3.connect(my_db)
         self.cur = self.conn.cursor()
@@ -10,18 +10,18 @@ class DataBase:
         self.conn.commit()
 
     def insert(self,uname, pword, security_answer):
-        """ This method adds a new book to the database using the title, author, year, and isbn."""
+        """ This method adds a new user to the database."""
         self.cur.execute("INSERT INTO book VALUES (NULL,?,?,?)",(uname,pword,security_answer))
         self.conn.commit() 
     
     def view_user_security_data(self, uname):
-        """This method allows you to see all the books added thus far."""
+        """This method allows you to get the saved security answer data."""
         self.cur.execute("SELECT password, security FROM book WHERE name=?",(uname,))
         rows=self.cur.fetchall()
         return rows
     
     def view_user_login_data(self, uname):
-        """This method allows you to see all the books added thus far."""
+        """This method allows you to get the saved user password."""
         self.cur.execute("SELECT password FROM book WHERE name=?",(uname,))
         rows=self.cur.fetchall()
         return rows
