@@ -45,7 +45,6 @@ class DataBase:
                 break
         return answer
     
-    
     def update_password(self,password,uname):
         """This method lets you update existing books with new information."""
         self.cur.execute("UPDATE book SET password=? WHERE name=?",(password,uname))
@@ -53,7 +52,6 @@ class DataBase:
     
     def __del__(self):
         self.conn.close()
-
 
 def hash_password(password, salt):
     """Takes a string password and a byte-like-object as a salt

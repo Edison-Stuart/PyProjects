@@ -30,17 +30,22 @@ class LoginScreen(Screen):
 
     def login(self, uname, pword):
         """Method that defines the instructions for the login button."""
-        saved_code = db.view_user_login_data(uname)[0]
-
-        my_salt = saved_code[0][:32]
-        my_saved_password = saved_code[0][32:]
-    
-        my_hashed_pword = validate_password(pword, my_saved_password, my_salt)
-        if my_hashed_pword is True:
-            self.manager.transition.direction = 'left'
-            self.manager.current = 'login_screen_success'
+        
+        check_in_db = db.is_in_db(uname)
+        if check_in_db is False:
+            self.ids.login_wrong.text = "Wrong username"
         else:
-            self.ids.login_wrong.text = "Wrong password"
+            saved_code = db.view_user_login_data(uname)[0]
+
+            my_salt = saved_code[0][:32]
+            my_saved_password = saved_code[0][32:]
+    
+            my_hashed_pword = validate_password(pword, my_saved_password, my_salt)
+            if my_hashed_pword is True:
+                self.manager.transition.direction = 'left'
+                self.manager.current = 'login_screen_success'
+            else:
+                self.ids.login_wrong.text = "Wrong password"
     
     def forgot_password(self):
         """Method that defines the instructions for the forgot password button."""
