@@ -1,0 +1,198 @@
+<RootWidget>:
+    LoginScreen:
+        name: "login_screen"
+    SignUpScreen:
+        name: "sign_up_screen"
+    SignUpScreenSuccess:
+        name: "sign_up_screen_success"
+    LoginScreenSuccess:
+        name: "login_screen_success"
+    ForgotPasswordScreen:
+        name: "forgot_password_screen"
+    ChangePasswordScreen:
+        name: "change_password_screen"
+
+<LoginScreen>:
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 1
+            padding: 15, 15
+            spacing: 20, 20
+            Label:
+                text: "User Login"
+                font_size: "20sp"
+            TextInput:
+                id: username
+                hint_text: "Username"
+            TextInput:
+                id: password
+                hint_text: "Password"
+                password: True
+            RelativeLayout:
+                Button:
+                    text: "Login"
+                    size_hint: 0.3, 0.5
+                    on_press: root.login(root.ids.username.text, root.ids.password.text)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            Label:
+                id: login_wrong
+                text: ""
+        GridLayout:
+            cols: 2
+            size_hint: 0.2, 0.2
+            padding: 10, 10
+            spacing: 10, 0
+            Button:
+                text: "Forgot Password"
+                on_press: root.forgot_password()
+                opacity: 1 if self.state == 'normal' else 0.5
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+            Button:
+                text: "Sign Up"
+                on_press: root.sign_up()
+                opacity: 1 if self.state == 'normal' else 0.5
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+
+<LoginScreenSuccess>:
+    GridLayout:
+        padding: 30, 30
+        spacing: 30, 30
+        cols: 1
+        RelativeLayout:
+            ImageButton:
+                on_press: root.log_out()
+                source: "logout_hover.png" if self.hovered else "logout_nothover.png"
+                size_hint: 0.35, 0.35
+                pos_hint: {'center_x': 0.93, 'center_y': 0.8}
+        Label:
+            text: "How do you feel?"
+        TextInput:
+            id: feeling
+            hint_text: "Things to try: happy, sad, unloved..."
+        Button:
+            text: "Enlighten me"
+            on_press: root.get_quote(root.ids.feeling.text)
+            background_color: 1,1,1,0
+            color: 0.1, 0.7, 0.7, 1
+        ScrollView:
+            Label:
+                id: quote
+                text: ""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+
+<ForgotPasswordScreen>:
+    GridLayout:
+        cols: 1
+        padding: 20, 20
+        spacing: 20, 20
+        Label:
+            text: "Please enter your username"
+        TextInput:
+            id: forgotten_username
+            hint_text: "Username"
+        Label:
+            id: name_response
+            text: "Please enter Please enter your mother's maiden name, your favorite teacher, or a cool phrase you chose in box below"
+        TextInput:
+            id: security_answer
+        GridLayout:
+            cols: 2
+            Button:
+                text: 'Back to login'
+                on_press: root.back_to_login()
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+            Button:
+                text: 'Enter security info'
+                on_press: root.security_question_answer(root.ids.security_answer.text,root.ids.forgotten_username.text)
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+
+<ChangePasswordScreen>:
+    GridLayout:
+        cols:1
+        padding: 20, 20
+        spacing: 20, 20
+        Label:
+            text: "Please enter your username and new password"
+        TextInput:
+            id: changed_username
+            hint_text: "Username"
+        TextInput:
+            id: new_password
+            hint_text: "New Password"
+            password: True
+        Label:
+            id: password_response_label
+            text: ""
+        GridLayout:
+            cols: 2
+            Button:
+                text: "Back to login"
+                on_press: root.back_to_login()
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+            Button:
+                text: "Enter new info"
+                on_press: root.change_password(root.ids.changed_username.text,root.ids.new_password.text)
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+
+<SignUpScreen>:
+    GridLayout:
+        cols: 1
+        padding: 20, 20
+        spacing: 20, 20
+        Label:
+            text: "Sign up for a great steering wheel"
+        TextInput:
+            id: username
+            hint_text: "Username"
+        TextInput:
+            id: password
+            hint_text: "Password"
+            password: True
+        GridLayout:
+            cols:1
+        Label:
+            text: "Please pick only one security question to fill"
+        Label:
+            text: "Your mother's maiden name"
+        Label:
+            text: "The name of your favorite teacher"
+        Label:
+            text: "A cool phrase that you will remeber"
+        TextInput:
+            id: answer_input
+            hint_text: "Please answer here"
+        Label:
+            id: username_active
+            text: "" 
+        GridLayout:
+            cols: 2
+            Button:
+                text: "Back to login"
+                on_press: root.back_to_login()
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+            Button:
+                text: "Submit"
+                on_press: root.add_user(root.ids.username.text, root.ids.password.text, root.ids.answer_input.text)
+                background_color: 1,1,1,0
+                color: 0.1, 0.7, 0.7, 1
+
+<SignUpScreenSuccess>:
+    GridLayout:
+        cols: 1
+        Label:
+            text: "Sign up successful!"
+        Button:
+            text: "Login page"
+            on_press: root.back_to_login()
+            background_color: 1,1,1,0
+            color: 0.1, 0.7, 0.7, 1
